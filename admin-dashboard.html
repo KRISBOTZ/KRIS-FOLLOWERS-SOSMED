@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - KRIS FOLLOWERS SOSMED</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-brand">KRIS ADMIN</div>
+      <nav class="admin-sidebar-nav">
+        <a class="active" href="#orders" onclick="document.getElementById('admin-orders-section').scrollIntoView({behavior:'smooth'})">Pesanan</a>
+        <a href="#products" onclick="document.getElementById('admin-products-section').scrollIntoView({behavior:'smooth'})">Produk</a>
+        <a href="#clock-settings" onclick="document.getElementById('admin-clock-settings-section').scrollIntoView({behavior:'smooth'})">Pengaturan Jam</a>
+        <a href="#clock-settings" onclick="document.getElementById('admin-clock-settings-section').scrollIntoView({behavior:'smooth'})">Clock Settings</a>
+        <a href="#customer-messages" onclick="document.getElementById('admin-customer-section').scrollIntoView({behavior:'smooth'})" style="position:relative">
+          <span>📩 Pesan Customer</span>
+          <span id="admin-customer-badge" class="bb-badge-red" style="display:none;position:absolute;right:-6px;top:-6px">0</span>
+        </a>
+        <a href="admin-login.html" onclick="event.preventDefault();adminLogout()">Logout</a>
+      </nav>
+
+      <div style="margin-top:18px;color:var(--text-muted);font-size:.85rem;line-height:1.7">
+        Kelola pesanan & produk. Semua tersimpan di LocalStorage.
+      </div>
+    </aside>
+
+    <section class="admin-main">
+      <div class="admin-header">
+        <div class="admin-header-left" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+          <h1 style="margin:0">Dashboard Admin</h1>
+          <div id="kfs-live-clock" class="kfs-clock-card kfs-fade-in" aria-label="Jam Live">
+            <div class="kfs-clock-top">
+              <span class="kfs-clock-icon" aria-hidden="true">🕒</span>
+              <span class="kfs-clock-title">LIVE CLOCK</span>
+            </div>
+            <div class="kfs-clock-time">
+              <span id="kfs-clock-hh">00</span>
+              <span class="kfs-clock-sep">:</span>
+              <span id="kfs-clock-mm">00</span>
+              <span class="kfs-clock-sep">:</span>
+              <span id="kfs-clock-ss">00</span>
+              <span id="kfs-clock-tz"> WIB</span>
+            </div>
+            <div class="kfs-clock-date">
+              <span id="kfs-clock-day">Rabu</span>,
+              <span id="kfs-clock-date">17</span>
+              <span id="kfs-clock-month">Juni</span>
+              <span id="kfs-clock-year">2026</span>
+            </div>
+            <div class="kfs-clock-subtitle">
+              Mode: <span id="kfs-clock-mode-badge" class="kfs-clock-mode-badge kfs-auto-badge">🟢 Auto Mode</span>
+            </div>
+          </div>
+        </div>
+        <button class="admin-logout-btn" type="button" onclick="adminLogout()">Logout</button>
+      </div>
+
+
+      <div id="admin-stats" class="admin-stats-grid"></div>
+
+      <div id="admin-clock-settings-section" class="glass-card" style="padding:22px;margin-bottom:18px">
+        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px">
+          <div>
+            <h2 style="font-size:1.15rem;margin:0">⏱️ Pengaturan Jam</h2>
+            <div style="color:var(--text-muted);font-size:.88rem;margin-top:6px;line-height:1.6">Atur mode Auto/Manual, zona waktu, dan jam/tanggal.</div>
+          </div>
+          <div class="kfs-mode-indicator-wrap" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <span class="kfs-mode-pill kfs-auto" id="kfs-mode-pill-auto" aria-label="Auto Mode">🟢 Auto Mode</span>
+            <span class="kfs-mode-pill kfs-manual" id="kfs-mode-pill-manual" aria-label="Manual Mode">🟠 Manual Mode</span>
+          </div>
+        </div>
+
+        <div class="kfs-clock-settings-grid">
+          <div class="form-group">
+            <label for="kfs-clock-mode">Mode</label>
+            <select id="kfs-clock-mode" onchange="kfsOnModeChange()">
+              <option value="auto">Auto Time</option>
+              <option value="manual">Manual Time</option>
+            </select>
+          </div>
+
+          <div class="kfs-clock-mode-toggle-legend" aria-hidden="true" style="grid-column:1/-1;margin-top:-6px">
+            <span class="kfs-clock-mode-pill-auto">🟢 Auto Mode</span>
+            <span class="kfs-clock-mode-pill-manual">🟠 Manual Mode</span>
+          </div>
+
+          <div class="form-group">
+            <label for="kfs-clock-timezone">Zona Waktu</label>
+            <select id="kfs-clock-timezone">
+              <option value="WIB">WIB (UTC+7)</option>
+              <option value="WITA">WITA (UTC+8)</option>
+              <option value="WIT">WIT (UTC+9)</option>
+              <option value="UTC">UTC</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="kfs-clock-manual-time">Input Jam Manual (HH:MM:SS)</label>
+            <input id="kfs-clock-manual-time" type="text" placeholder="05:30:00" inputmode="numeric" />
+          </div>
+
+          <div class="form-group">
+            <label for="kfs-clock-manual-date">Input Tanggal Manual</label>
+            <input id="kfs-clock-manual-date" type="date" />
+          </div>
+
+          <div class="kfs-clock-settings-actions">
+            <button class="btn btn-primary" type="button" onclick="kfsSaveClockSettings()">Simpan</button>
+            <button class="btn btn-secondary" type="button" onclick="kfsResetToAuto()">Reset ke Waktu Otomatis</button>
+            <button class="btn btn-accent" type="button" onclick="kfsSyncWithSystem()">Sinkronkan dengan Waktu Sistem</button>
+            <button class="btn btn-secondary" type="button" onclick="kfsResetClockSettings()" style="border-color:rgba(124,58,237,0.35);color:rgba(124,58,237,1)">Reset Pengaturan Jam</button>
+          </div>
+
+          <div class="kfs-clock-settings-hint">
+            <div>🧠 Saat Manual Time aktif, jam akan berjalan real-time dari waktu awal yang admin input.</div>
+            <div style="margin-top:6px;color:var(--text-muted)">Tersimpan di LocalStorage (persist saat refresh).</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="admin-orders-section" class="glass-card" style="padding:22px;margin-bottom:18px">
+
+        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px">
+          <h2 style="font-size:1.15rem;margin:0">Semua Pesanan</h2>
+          <div class="admin-actions">
+            <input id="admin-search" type="search" placeholder="Cari kode/nama/produk..." style="padding:10px 12px;background:var(--bg-dark);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-family:var(--font-main);width:280px;max-width:80vw" />
+          </div>
+        </div>
+        <div id="admin-orders-table"></div>
+      </div>
+
+      <div id="admin-products-section" class="glass-card" style="padding:22px">
+        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px">
+          <h2 style="font-size:1.15rem;margin:0">Kelola Produk</h2>
+          <button class="btn btn-accent btn-sm" type="button" onclick="showAddProductForm()">Tambah Produk</button>
+        </div>
+        <div id="admin-products-table"></div>
+      </div>
+
+      <div id="admin-customer-section" class="glass-card" style="padding:22px;margin-top:18px">
+        <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px">
+          <h2 style="font-size:1.15rem;margin:0">📩 Pesan Customer</h2>
+          <div class="admin-actions" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+            <input id="admin-customer-search" type="search" placeholder="Cari nama/email..." style="padding:10px 12px;background:var(--bg-dark);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);font-family:var(--font-main);width:280px;max-width:70vw" />
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+          <div class="form-group" style="margin:0;flex:1;min-width:200px">
+            <label style="margin-bottom:8px">Kategori</label>
+            <select id="admin-customer-filter-category" style="width:100%">
+              <option value="">Semua</option>
+              <option value="Keluhan">Keluhan</option>
+              <option value="Kritik">Kritik</option>
+              <option value="Saran">Saran</option>
+              <option value="Pertanyaan">Pertanyaan</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0;flex:1;min-width:200px">
+            <label style="margin-bottom:8px">Status</label>
+            <select id="admin-customer-filter-status" style="width:100%">
+              <option value="">Semua</option>
+              <option value="Belum Dibaca">Belum Dibaca</option>
+              <option value="Sudah Dibaca">Sudah Dibaca</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin:0;flex:1;min-width:200px">
+            <label style="margin-bottom:8px">Tanggal</label>
+            <select id="admin-customer-filter-date" style="width:100%">
+              <option value="">Semua</option>
+              <option value="today">Hari ini</option>
+              <option value="last7">7 hari terakhir</option>
+              <option value="last30">30 hari terakhir</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="admin-customer-messages-stats" class="admin-stats-grid" style="margin-bottom:18px"></div>
+
+        <div id="admin-customer-messages-table"></div>
+      </div>
+    </section>
+  </div>
+
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // search re-render on input
+    document.addEventListener('DOMContentLoaded', function(){
+      var s = document.getElementById('admin-search');
+      if(s){
+        s.addEventListener('input', function(){
+          if(window.renderAdminDashboard) renderAdminDashboard();
+        });
+      }
+    });
+  </script>
+
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

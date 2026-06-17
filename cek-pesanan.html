@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cek Pesanan - KRIS FOLLOWERS SOSMED</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .track-wrap{display:grid;grid-template-columns:380px 1fr;gap:18px;align-items:start}
+    @media (max-width: 980px){.track-wrap{grid-template-columns:1fr}}
+    .track-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .track-box input{width:100%;padding:12px 14px;background:var(--bg-dark);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);outline:none}
+    .track-box .label{font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;font-size:.72rem;margin-bottom:10px}
+  </style>
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html">
+        <span class="header-logo-icon">K</span>
+        <span>KRIS FOLLOWERS SOSMED</span>
+      </a>
+      <nav class="nav-links">
+        <a href="beranda.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="cara-kerja.html">Cara Kerja</a>
+        <a href="pembayaran.html">Pembayaran</a>
+        <a class="active" href="cek-pesanan.html">Cek Pesanan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="tentang.html">Tentang</a>
+      </nav>
+      <button class="hamburger" type="button" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:140px">
+      <div class="container">
+        <div class="section-label">Cek Pesanan</div>
+        <h1 class="section-title">Lacak Status Transaksi</h1>
+        <p class="section-subtitle">Masukkan kode pesanan yang kamu dapat saat membuat order.</p>
+
+        <div class="track-wrap" style="margin-top:26px">
+          <div class="glass-card track-box">
+            <div class="label">Kode Pesanan</div>
+            <input id="track-code" type="text" placeholder="Contoh: KFS-AB12CD34" autocomplete="off" />
+            <div class="track-actions">
+              <button class="btn btn-primary" type="button" onclick="trackOrder()">Cek Pesanan</button>
+              <button class="btn btn-secondary" type="button" onclick="(function(){var i=document.getElementById('track-code'); if(i) i.value=''; var r=document.getElementById('track-result'); if(r) r.innerHTML='';})()">Reset</button>
+            </div>
+            <p class="notice" style="margin-top:14px">Status: <b>Menunggu Pembayaran</b> / <b>Diproses</b> / <b>Selesai</b></p>
+          </div>
+
+          <div id="track-result"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KRIS FOLLOWERS SOSMED</h3>
+          <p>Premium services untuk Instagram & TikTok.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="beranda.html">Beranda</a>
+          <a href="produk.html">Produk</a>
+          <a href="cara-kerja.html">Cara Kerja</a>
+          <a href="pembayaran.html">Pembayaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Transaksi</h4>
+          <a href="cek-pesanan.html">Cek Pesanan</a>
+          <a href="kontak.html">Kontak</a>
+          <a href="tentang.html">Tentang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <a href="admin-login.html">Login Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year"></span> KRIS FOLLOWERS SOSMED. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tentang - KRIS FOLLOWERS SOSMED</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .about-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+    @media (max-width: 980px){.about-grid{grid-template-columns:1fr}}
+    .about-card{background:var(--bg-glass-2);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+    .about-card h3{margin-bottom:10px}
+    .about-card p{color:var(--text-secondary);font-size:.92rem}
+    .services{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .pill{padding:10px 14px;border-radius:999px;border:1px solid rgba(0,212,255,.25);background:rgba(0,212,255,.06);color:var(--text-secondary);font-weight:800;font-size:.85rem}
+  </style>
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html">
+        <span class="header-logo-icon">K</span>
+        <span>KRIS FOLLOWERS SOSMED</span>
+      </a>
+      <nav class="nav-links">
+        <a href="beranda.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="cara-kerja.html">Cara Kerja</a>
+        <a href="pembayaran.html">Pembayaran</a>
+        <a href="cek-pesanan.html">Cek Pesanan</a>
+        <a href="kontak.html">Kontak</a>
+        <a class="active" href="tentang.html">Tentang</a>
+      </nav>
+      <button class="hamburger" type="button" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:140px">
+      <div class="container">
+        <div class="section-label">Tentang</div>
+        <h1 class="section-title">KRIS FOLLOWERS SOSMED</h1>
+        <p class="section-subtitle">Website menyediakan layanan pertumbuhan sosial media yang premium dan mudah digunakan.</p>
+
+        <div class="glass-card" style="margin-top:26px">
+          <h3 style="margin-bottom:10px">Layanan yang tersedia</h3>
+          <div class="services">
+            <div class="pill">Instagram Followers</div>
+            <div class="pill">Instagram Like</div>
+            <div class="pill">TikTok Followers</div>
+            <div class="pill">TikTok Like</div>
+            <div class="pill">TikTok View</div>
+          </div>
+          <p style="margin-top:16px;color:var(--text-secondary);font-size:.92rem">
+            Fokus kami: pengalaman transaksi yang jelas, status pesanan yang mudah dilacak, dan tampilan modern dark premium.
+          </p>
+        </div>
+
+        <div class="about-grid" style="margin-top:18px">
+          <div class="about-card">
+            <h3 style="color:var(--primary)">Visi</h3>
+            <p>Membantu kreator dan bisnis mempercepat pertumbuhan sosial media dengan cara yang rapi, premium, dan terpercaya.</p>
+          </div>
+          <div class="about-card">
+            <h3 style="color:var(--primary)">Misi</h3>
+            <p>Menyediakan layanan: Followers / Like / View untuk Instagram & TikTok serta alur pemesanan yang mudah dipahami.</p>
+          </div>
+          <div class="about-card">
+            <h3 style="color:var(--primary)">Keunggulan</h3>
+            <p>Design dark premium, animasi halus, loading cepat, pencatatan order di LocalStorage, dan dashboard admin untuk update status.</p>
+          </div>
+        </div>
+
+        <div class="cta-band" style="margin-top:26px">
+          <div>
+            <h2>Siap naik kelas?</h2>
+            <p>Buat pesanan dan cek statusnya kapan saja.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary btn-lg" href="produk.html">Order Sekarang</a>
+            <a class="btn btn-secondary btn-lg" href="cek-pesanan.html">Cek Pesanan</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KRIS FOLLOWERS SOSMED</h3>
+          <p>Premium services untuk Instagram & TikTok.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="beranda.html">Beranda</a>
+          <a href="produk.html">Produk</a>
+          <a href="cara-kerja.html">Cara Kerja</a>
+          <a href="pembayaran.html">Pembayaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Transaksi</h4>
+          <a href="cek-pesanan.html">Cek Pesanan</a>
+          <a href="kontak.html">Kontak</a>
+          <a href="tentang.html">Tentang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <a href="admin-login.html">Login Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year"></span> KRIS FOLLOWERS SOSMED. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

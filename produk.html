@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Produk - KRIS FOLLOWERS SOSMED</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .page-wrap{padding-top:140px}
+    .products-top{display:flex;gap:16px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px}
+    .filters{display:flex;gap:10px;flex-wrap:wrap}
+    .filter-btn{cursor:pointer;padding:10px 14px;border-radius:999px;border:1px solid var(--border-color);background:rgba(255,255,255,.02);color:var(--text-secondary);transition:var(--transition);font-weight:700;font-size:.85rem}
+    .filter-btn:hover{border-color:var(--border-glow);box-shadow:var(--shadow-glow)}
+    .filter-btn.active{background:rgba(0,212,255,.08);color:var(--primary);border-color:rgba(0,212,255,.35)}
+
+    .search-box{display:flex;gap:10px;align-items:center}
+    .search-box input{width:280px;max-width:80vw;padding:12px 14px;background:var(--bg-dark);border:1px solid var(--border-color);border-radius:var(--radius-sm);color:var(--text-primary);outline:none}
+
+    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width: 980px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 640px){.products-grid{grid-template-columns:1fr}}
+
+    .product-card{background:var(--bg-glass-2);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:18px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:var(--transition);box-shadow:var(--shadow-sm)}
+    .product-card:hover{transform:translateY(-6px);border-color:var(--border-glow);box-shadow:var(--shadow-glow)}
+    .product-category{color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;font-size:.72rem;font-weight:800;margin-bottom:10px}
+    .product-name{font-weight:900;font-size:1.05rem;margin-bottom:10px}
+    .product-price{font-weight:900;font-size:1.35rem;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+    .product-desc{color:var(--text-secondary);font-size:.9rem;margin-bottom:16px}
+
+    .product-actions{display:flex;justify-content:flex-start;gap:10px}
+    .no-results{padding:60px 20px}
+  </style>
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html">
+        <span class="header-logo-icon">K</span>
+        <span>KRIS FOLLOWERS SOSMED</span>
+      </a>
+      <nav class="nav-links">
+        <a href="beranda.html">Beranda</a>
+        <a class="active" href="produk.html">Produk</a>
+        <a href="cara-kerja.html">Cara Kerja</a>
+        <a href="pembayaran.html">Pembayaran</a>
+        <a href="cek-pesanan.html">Cek Pesanan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="tentang.html">Tentang</a>
+      </nav>
+      <button class="hamburger" type="button" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Order Modal (Dipakai oleh assets/js/main.js) -->
+  <div id="order-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="Form Pesanan">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Form Pemesanan</h2>
+        <button class="modal-close" type="button" aria-label="Tutup" onclick="closeOrderModal()">✕</button>
+      </div>
+
+      <div class="glass-card" style="padding:18px;margin-bottom:16px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+          <div>
+            <div style="color:var(--text-muted);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:2px">Produk</div>
+            <div id="modal-product-name" style="font-weight:900;margin-top:6px">-</div>
+          </div>
+          <div>
+            <div style="color:var(--text-muted);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:2px">Harga</div>
+            <div id="modal-product-price" style="font-weight:900;color:var(--primary);margin-top:6px">-</div>
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="event.preventDefault();submitOrder()">
+        <input type="hidden" id="order-product" />
+
+        <div class="form-group">
+          <label for="order-name">Nama</label>
+          <input id="order-name" type="text" placeholder="Masukkan nama" autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="order-username">Username / Link Akun</label>
+          <input id="order-username" type="text" placeholder="Contoh: @username atau link akun" autocomplete="off" />
+        </div>
+
+        <div class="form-group">
+          <label for="order-amount">Jumlah (otomatis)</label>
+          <input id="order-amount" type="number" min="1" step="1" disabled />
+        </div>
+
+        <div class="form-group">
+          <label for="order-wa">Nomor WhatsApp</label>
+          <input id="order-wa" type="tel" placeholder="Contoh: 08xxxxxxxxxx" autocomplete="tel" />
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end">
+          <button class="btn btn-secondary" type="button" onclick="closeOrderModal()">Batal</button>
+          <button class="btn btn-primary" type="submit">Buat Pesanan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main>
+    <section class="section page-wrap">
+      <div class="container">
+        <div class="products-top">
+          <div>
+            <div class="section-label">Produk</div>
+            <h1 class="section-title" style="margin-bottom:6px">Paket Premium</h1>
+            <p class="section-subtitle" style="margin-bottom:0">Pilih layanan, tentukan jumlah, lalu buat pesanan.</p>
+          </div>
+
+          <div class="search-box">
+            <input id="product-search" type="search" placeholder="Cari produk..." />
+          </div>
+        </div>
+
+        <div class="filters" style="margin-bottom:20px">
+          <button class="filter-btn active" type="button" data-filter="all">Semua</button>
+          <button class="filter-btn" type="button" data-filter="instagram-followers">IG Followers</button>
+          <button class="filter-btn" type="button" data-filter="instagram-like">IG Like</button>
+          <button class="filter-btn" type="button" data-filter="tiktok-followers">TikTok Followers</button>
+          <button class="filter-btn" type="button" data-filter="tiktok-like">TikTok Like</button>
+          <button class="filter-btn" type="button" data-filter="tiktok-view">TikTok View</button>
+        </div>
+
+        <div id="products-grid" class="products-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KRIS FOLLOWERS SOSMED</h3>
+          <p>Premium services untuk Instagram & TikTok.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="beranda.html">Beranda</a>
+          <a href="produk.html">Produk</a>
+          <a href="cara-kerja.html">Cara Kerja</a>
+          <a href="pembayaran.html">Pembayaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Transaksi</h4>
+          <a href="cek-pesanan.html">Cek Pesanan</a>
+          <a href="kontak.html">Kontak</a>
+          <a href="tentang.html">Tentang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <a href="admin-login.html">Login Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year"></span> KRIS FOLLOWERS SOSMED. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

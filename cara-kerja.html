@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cara Kerja - KRIS FOLLOWERS SOSMED</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+    @media (max-width: 980px){.steps{grid-template-columns:1fr;}}
+    .step-card{background:var(--bg-glass-2);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:18px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:var(--transition)}
+    .step-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-glow);border-color:var(--border-glow)}
+    .step-num{width:44px;height:44px;border-radius:16px;background:rgba(0,212,255,.10);border:1px solid rgba(0,212,255,.22);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--primary);margin-bottom:12px}
+    .step-title{font-weight:900;margin-bottom:8px}
+    .step-desc{color:var(--text-secondary);font-size:.92rem}
+  </style>
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html">
+        <span class="header-logo-icon">K</span>
+        <span>KRIS FOLLOWERS SOSMED</span>
+      </a>
+      <nav class="nav-links">
+        <a href="beranda.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a class="active" href="cara-kerja.html">Cara Kerja</a>
+        <a href="pembayaran.html">Pembayaran</a>
+        <a href="cek-pesanan.html">Cek Pesanan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="tentang.html">Tentang</a>
+      </nav>
+      <button class="hamburger" type="button" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:140px">
+      <div class="container">
+        <div class="section-label">Cara Kerja</div>
+        <h1 class="section-title">Alur Pemesanan Premium</h1>
+        <p class="section-subtitle">Pilih layanan → isi data → bayar → pesanan diproses → selesai.</p>
+
+        <div class="steps" style="margin-top:26px">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-title">Pilih Layanan</div>
+            <div class="step-desc">Masuk ke halaman produk, pilih paket Instagram/TikTok sesuai kebutuhan.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-title">Isi Data Pesanan</div>
+            <div class="step-desc">Isi nama, username/link akun, jumlah, dan nomor WhatsApp.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-title">Lakukan Pembayaran</div>
+            <div class="step-desc">Buka halaman pembayaran, pilih metode dan lakukan transfer.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-title">Pesanan Diproses</div>
+            <div class="step-desc">Status pesanan muncul otomatis: Menunggu Pembayaran → Diproses.</div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-title">Pesanan Selesai</div>
+            <div class="step-desc">Status berubah menjadi Selesai. Kamu bisa cek performa di akun.</div>
+          </div>
+        </div>
+
+        <div class="cta-band" style="margin-top:34px">
+          <div>
+            <h2>Mulai sekarang?</h2>
+            <p>Ambil paket terbaikmu dan buat pesanan dalam hitungan menit.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary btn-lg" href="produk.html">Order Produk</a>
+            <a class="btn btn-secondary btn-lg" href="pembayaran.html">Pembayaran</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KRIS FOLLOWERS SOSMED</h3>
+          <p>Premium services untuk Instagram & TikTok.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="beranda.html">Beranda</a>
+          <a href="produk.html">Produk</a>
+          <a href="cara-kerja.html">Cara Kerja</a>
+          <a href="pembayaran.html">Pembayaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Transaksi</h4>
+          <a href="cek-pesanan.html">Cek Pesanan</a>
+          <a href="kontak.html">Kontak</a>
+          <a href="tentang.html">Tentang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <a href="admin-login.html">Login Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year"></span> KRIS FOLLOWERS SOSMED. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

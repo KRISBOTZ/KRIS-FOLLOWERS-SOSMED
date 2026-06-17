@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KRIS FOLLOWERS SOSMED - Social Media Growth Premium</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    /* Page-specific premium bits */
+    .hero-wrap{padding-top:140px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .hero-title{font-size:3rem;font-weight:900;line-height:1.05;margin-bottom:14px}
+    .hero-sub{color:var(--text-secondary);font-size:1.06rem;margin-bottom:24px;max-width:560px}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start}
+    .hero-badges{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .badge{border:1px solid var(--border-color);background:rgba(0,212,255,.06);padding:10px 14px;border-radius:999px;color:var(--text-secondary);font-size:.85rem;display:flex;gap:10px;align-items:center}
+    .badge i{width:26px;height:26px;border-radius:10px;background:linear-gradient(135deg,#00d4ff,#7c3aed);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-weight:800}
+    .hero-panel{background:var(--bg-glass);border:1px solid var(--border-color);border-radius:var(--radius-lg);padding:22px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .banner-slider{position:relative}
+    .banner-slide{display:none;opacity:0;transform:translateY(10px);transition:all .5s ease}
+    .banner-slide.active{display:block;opacity:1;transform:translateY(0)}
+    .banner-img{width:100%;height:240px;object-fit:cover;border-radius:var(--radius-md);border:1px solid var(--border-color)}
+    .banner-dots{display:flex;gap:10px;justify-content:center;margin-top:14px}
+    .banner-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(0,212,255,.25);cursor:pointer;transition:var(--transition)}
+    .banner-dot.active{background:var(--gradient-primary);box-shadow:0 0 18px rgba(0,212,255,.25)}
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+    .stat-card{background:rgba(255,255,255,.03);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:16px}
+    .stat-val{font-size:1.9rem;font-weight:900;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin-bottom:4px}
+    .stat-lbl{color:var(--text-secondary);font-size:.9rem}
+    .section-title{margin-top:0}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .feature-item{padding:22px;border-radius:var(--radius-md)}
+    .feature-item .icon{width:44px;height:44px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.18);margin-bottom:14px}
+    .feature-item h3{font-size:1.05rem;margin-bottom:8px}
+    .feature-item p{color:var(--text-secondary);font-size:.92rem}
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .testimonial-card{background:var(--bg-glass-2);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:20px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);transition:var(--transition);min-height:170px}
+    .testimonial-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-glow)}
+    .testimonial-stars{color:var(--accent);letter-spacing:2px;margin-bottom:10px;font-size:.95rem}
+    .testimonial-text{color:var(--text-secondary);margin-bottom:16px;font-size:.95rem}
+    .testimonial-author{display:flex;gap:12px;align-items:center}
+    .testimonial-avatar{width:40px;height:40px;border-radius:14px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.28);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--primary)}
+    .testimonial-name{font-weight:800}
+    .testimonial-role{font-size:.82rem;color:var(--text-muted);margin-top:2px}
+    .cta-band{margin-top:26px;background:linear-gradient(135deg,rgba(0,212,255,.10),rgba(124,58,237,.10));border:1px solid rgba(0,212,255,.18);border-radius:var(--radius-xl);padding:26px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+    .cta-band h2{margin:0;font-size:1.4rem}
+    .cta-band p{margin:6px 0 0;color:var(--text-secondary)}
+    .floating-note{display:flex;align-items:center;gap:10px;color:var(--text-secondary);font-size:.9rem;margin-top:16px}
+    .floating-note .dot{width:10px;height:10px;border-radius:50%;background:var(--gradient-primary);box-shadow:0 0 20px rgba(0,212,255,.25)}
+    @media (max-width: 900px){.hero-grid{grid-template-columns:1fr;}.feature-grid{grid-template-columns:1fr;}.testimonials{grid-template-columns:1fr;}.stats-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+      <div class="header-inner">
+      	<a class="header-logo" href="index.html" aria-label="KRIS FOLLOWERS SOSMED">
+      	  <span class="header-logo-icon">K</span>
+      	  <span>KRIS FOLLOWERS SOSMED</span>
+      	</a>
+
+      	<div id="kfs-live-clock" class="kfs-clock-card kfs-fade-in" aria-label="Jam Live">
+      	  <div class="kfs-clock-top">
+      	    <span class="kfs-clock-icon" aria-hidden="true">🕒</span>
+      	    <span class="kfs-clock-title">LIVE CLOCK</span>
+      	  </div>
+      	  <div class="kfs-clock-time">
+      	    <span id="kfs-clock-hh">00</span>
+      	    <span class="kfs-clock-sep">:</span>
+      	    <span id="kfs-clock-mm">00</span>
+      	    <span class="kfs-clock-sep">:</span>
+      	    <span id="kfs-clock-ss">00</span>
+      	    <span class="kfs-clock-wib"> WIB</span>
+      	  </div>
+      	  <div class="kfs-clock-date">
+      	    <span id="kfs-clock-day">Rabu</span>,
+      	    <span id="kfs-clock-date">17</span>
+      	    <span id="kfs-clock-month">Juni</span>
+      	    <span id="kfs-clock-year">2026</span>
+      	  </div>
+      	</div>
+
+      	<nav class="nav-links" aria-label="Menu utama">
+
+        <a href="beranda.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="cara-kerja.html">Cara Kerja</a>
+        <a href="pembayaran.html">Pembayaran</a>
+        <a href="cek-pesanan.html">Cek Pesanan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="tentang.html">Tentang</a>
+      </nav>
+
+      <button class="hamburger" type="button" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <section class="section hero-wrap">
+      <div class="container hero-grid">
+        <div>
+          <div class="section-label floating">Social Media Growth</div>
+          <h1 class="hero-title">Followers & Like Premium, Proses Cepat, Desain Modern.</h1>
+          <p class="hero-sub">Layanan Instagram Followers, Instagram Like, TikTok Followers, TikTok Like, dan TikTok View untuk bantu brand kamu naik kelas.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="produk.html">Jelajahi Produk</a>
+            <a class="btn btn-secondary btn-lg" href="cek-pesanan.html">Cek Pesanan</a>
+          </div>
+          <div class="hero-badges">
+            <div class="badge"><i>⚡</i> Respon cepat</div>
+            <div class="badge"><i>🛡️</i> Data tersimpan (LocalStorage)</div>
+            <div class="badge"><i>✨</i> Dark Premium UI</div>
+          </div>
+
+          <div class="stats-grid" style="margin-top:22px">
+            <div class="stat-card"><span class="stat-val hero-stat-value">1200+</span><span class="stat-lbl">Pesanan</span></div>
+            <div class="stat-card"><span class="stat-val hero-stat-value">98%</span><span class="stat-lbl">Kepuasan</span></div>
+            <div class="stat-card"><span class="stat-val hero-stat-value">24/7</span><span class="stat-lbl">Dukungan</span></div>
+          </div>
+
+          <div class="floating-note"><span class="dot"></span><span>Ready untuk Social Growth? Mulai order sekarang.</span></div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="banner-slider">
+            <div class="banner-slide active">
+              <img class="banner-img" loading="lazy" src="assets/banner/banner1.jpg" alt="Instagram Marketing" />
+            </div>
+            <div class="banner-slide">
+              <img class="banner-img" loading="lazy" src="assets/banner/banner2.jpg" alt="TikTok Marketing" />
+            </div>
+            <div class="banner-slide">
+              <img class="banner-img" loading="lazy" src="assets/banner/banner3.jpg" alt="Social Media Growth" />
+            </div>
+            <div class="banner-slide">
+              <img class="banner-img" loading="lazy" src="assets/banner/banner4.jpg" alt="Followers Boost" />
+            </div>
+            <div class="banner-slide">
+              <img class="banner-img" loading="lazy" src="assets/banner/banner5.jpg" alt="Like & View Services" />
+            </div>
+
+            <div class="banner-dots" aria-label="Kontrol slider">
+              <div class="banner-dot active" tabindex="0" role="button" aria-label="Slide 1"></div>
+              <div class="banner-dot" tabindex="0" role="button" aria-label="Slide 2"></div>
+              <div class="banner-dot" tabindex="0" role="button" aria-label="Slide 3"></div>
+              <div class="banner-dot" tabindex="0" role="button" aria-label="Slide 4"></div>
+              <div class="banner-dot" tabindex="0" role="button" aria-label="Slide 5"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px" class="glass-card">
+            <h3 style="margin-bottom:8px">CTA Premium</h3>
+            <p style="color:var(--text-secondary);margin-bottom:18px">Pilih layanan, isi data, bayar, lalu pesanan diproses.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a class="btn btn-accent" href="cara-kerja.html">Cara Kerja</a>
+              <a class="btn btn-primary" href="produk.html">Order Sekarang</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="section-label">Keunggulan</div>
+        <h2 class="section-title">Kenapa Harus KRIS FOLLOWERS SOSMED?</h2>
+        <p class="section-subtitle">Premium look, proses pemesanan jelas, dan status pesanan mudah dilacak.</p>
+
+        <div class="feature-grid">
+          <div class="glass-card feature-item">
+            <div class="icon">⚡</div>
+            <h3>Proses Cepat</h3>
+            <p>Order tersimpan otomatis di perangkat kamu dan admin dapat update status.</p>
+          </div>
+          <div class="glass-card feature-item">
+            <div class="icon">🧊</div>
+            <h3>Glassmorphism Premium</h3>
+            <p>Dark theme elegan dengan glow, hover effect, dan animasi halus.</p>
+          </div>
+          <div class="glass-card feature-item">
+            <div class="icon">🔍</div>
+            <h3>Cek Pesanan Mudah</h3>
+            <p>Masukkan kode pesanan untuk melihat status: Menunggu / Diproses / Selesai.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-label">Testimoni</div>
+        <h2 class="section-title">Kata Mereka</h2>
+        <p class="section-subtitle">Review pelanggan adalah bukti layanan kami dipercaya.</p>
+
+        <div id="testimonials-grid" class="testimonials"></div>
+
+        <div class="cta-band">
+          <div>
+            <h2>Siap boost social kamu?</h2>
+            <p>Pilih paket favorit, buat pesanan, dan lakukan pembayaran.</p>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a class="btn btn-primary btn-lg" href="produk.html">Mulai Order</a>
+            <a class="btn btn-secondary btn-lg" href="kontak.html">Hubungi Admin</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KRIS FOLLOWERS SOSMED</h3>
+          <p>Layanan Instagram Followers, Instagram Like, TikTok Followers, TikTok Like, dan TikTok View. Premium, cepat, dan mudah.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="beranda.html">Beranda</a>
+          <a href="produk.html">Produk</a>
+          <a href="cara-kerja.html">Cara Kerja</a>
+          <a href="pembayaran.html">Pembayaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Transaksi</h4>
+          <a href="cek-pesanan.html">Cek Pesanan</a>
+          <a href="kontak.html">Kontak</a>
+          <a href="tentang.html">Tentang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <a href="admin-login.html">Login Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year"></span> KRIS FOLLOWERS SOSMED. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

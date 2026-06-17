@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pembayaran - KRIS FOLLOWERS SOSMED</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+    @media (max-width: 980px){.pay-grid{grid-template-columns:1fr}}
+    .pay-method{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+    .method-btn{padding:10px 14px;border-radius:999px;border:1px solid var(--border-color);background:rgba(255,255,255,.02);color:var(--text-secondary);cursor:pointer;font-weight:800;font-size:.85rem;transition:var(--transition)}
+    .method-btn.active{border-color:rgba(0,212,255,.35);background:rgba(0,212,255,.08);color:var(--primary)}
+    .qris-wrap{display:flex;flex-direction:column;gap:12px}
+    .qris-img{border-radius:var(--radius-md);border:1px solid var(--border-color);background:rgba(255,255,255,.02)}
+    .num-box{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .num-box .num{font-weight:900;color:var(--primary);letter-spacing:.5px}
+    .hint{color:var(--text-secondary);font-size:.92rem}
+    .notice{font-size:.88rem;color:var(--text-muted);line-height:1.8}
+
+    .pay-contents{display:flex;flex-direction:column;gap:12px}
+
+    .method-container{transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s; will-change:opacity,transform}
+    .method-container.is-hidden{opacity:0; transform:translateY(8px); pointer-events:none; visibility:hidden}
+    .method-container.is-shown{opacity:1; transform:translateY(0); pointer-events:auto; visibility:visible}
+
+    .confirm-btn{margin-top:2px}
+
+    /* disabled by default */
+    .confirm-btn:disabled{
+      opacity:.5;
+      cursor:not-allowed;
+      box-shadow:none !important;
+    }
+
+    /* neon glow when enabled */
+    .confirm-btn.is-enabled{
+      opacity:1;
+      cursor:pointer;
+      box-shadow:
+        0 0 12px rgba(0,212,255,.35),
+        0 0 28px rgba(0,212,255,.18),
+        0 0 60px rgba(0,212,255,.10);
+      border-color: rgba(0,212,255,.35);
+      animation: neonPulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes neonPulse {
+      0%,100% { filter: drop-shadow(0 0 0 rgba(0,212,255,0)); }
+      50% { filter: drop-shadow(0 0 14px rgba(0,212,255,.35)); }
+    }
+
+    .pay-loading .spinner{
+      width:18px;height:18px;
+      border-radius:50%;
+      border:2px solid rgba(255,255,255,.20);
+      border-top-color: var(--primary);
+      animation: spin .7s linear infinite;
+      margin:0 auto;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+  </style>
+</head>
+<body>
+  <div id="loading-screen" class="loading-screen" aria-live="polite" aria-busy="true">
+    <div class="loading-icon">✦</div>
+    <div class="loading-logo">KRIS FOLLOWERS SOSMED</div>
+    <div class="loading-sub">Premium Social Media Growth</div>
+    <div class="loading-bar-wrapper"><div class="loading-bar"></div></div>
+  </div>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="header-logo" href="index.html">
+        <span class="header-logo-icon">K</span>
+        <span>KRIS FOLLOWERS SOSMED</span>
+      </a>
+      <nav class="nav-links">
+        <a href="beranda.html">Beranda</a>
+        <a href="produk.html">Produk</a>
+        <a href="cara-kerja.html">Cara Kerja</a>
+        <a class="active" href="pembayaran.html">Pembayaran</a>
+        <a href="cek-pesanan.html">Cek Pesanan</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="tentang.html">Tentang</a>
+      </nav>
+      <button class="hamburger" type="button" aria-label="Buka menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:140px">
+      <div class="container">
+        <div class="section-label">Pembayaran</div>
+        <h1 class="section-title">Pilih Metode Pembayaran</h1>
+        <p class="section-subtitle">DANA, GOPAY, dan QRIS tersedia. Nomor pembayaran bisa kamu salin otomatis.</p>
+
+        <div class="pay-grid" style="margin-top:26px">
+          <div class="glass-card">
+            <div class="payment-tabs pay-method" role="tablist" aria-label="Metode Pembayaran">
+              <button class="method-btn active" type="button" role="tab" aria-selected="true" data-method="qris">QRIS</button>
+              <button class="method-btn" type="button" role="tab" aria-selected="false" data-method="dana">DANA</button>
+              <button class="method-btn" type="button" role="tab" aria-selected="false" data-method="gopay">GOPAY</button>
+            </div>
+
+            <div class="pay-contents">
+              <div id="qris-container" class="method-container" aria-hidden="false">
+                <img id="payment-qris" class="qris-img" loading="lazy" src="assets/payment/qris.jpg" alt="QRIS" />
+              </div>
+
+              <div id="number-container" class="method-container" aria-hidden="true">
+                <div class="num-box">
+                  <div>
+                    <div class="num-label" style="color:var(--text-muted);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:2px">NOMOR</div>
+                    <div class="num" id="payment-number">0857-8255-4720</div>
+                  </div>
+                  <button id="copy-number-btn" class="btn btn-secondary" type="button">Salin Nomor</button>
+                </div>
+              </div>
+
+              <div class="notice">
+                <strong style="color:var(--text-primary)">Catatan:</strong> Setelah transfer, lakukan konfirmasi pembayaran agar admin memproses pesanan kamu.
+              </div>
+
+              <label class="pay-checkbox" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;user-select:none">
+                <input id="pay-confirmed-checkbox" type="checkbox" checked="false" style="margin-top:3px" />
+                <span style="color:var(--text-secondary);font-weight:800">Saya sudah melakukan pembayaran.</span>
+              </label>
+
+              <button id="confirm-payment-btn" class="btn btn-primary confirm-btn" type="button" onclick="confirmPayment()" disabled>
+                Konfirmasi Pembayaran
+              </button>
+
+              <div id="pay-loading" class="pay-loading" aria-live="polite" style="display:none;margin-top:10px">
+                <div class="spinner" aria-hidden="true"></div>
+                <div class="notice" style="margin-top:6px">Memproses konfirmasi pembayaran...</div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="glass-card">
+            <h3 style="font-size:1.1rem;margin-bottom:10px">Preview Pembayaran</h3>
+            <p class="hint" style="margin-bottom:14px">Ikuti langkah ini agar pesanan kamu cepat diproses.</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div class="glass-card" style="padding:16px;background:rgba(255,255,255,.02)">
+                <div style="font-weight:900;color:var(--primary);margin-bottom:6px">1) Transfer</div>
+                <div style="color:var(--text-secondary);font-size:.92rem">Lakukan transfer sesuai metode yang kamu pilih.</div>
+              </div>
+              <div class="glass-card" style="padding:16px;background:rgba(255,255,255,.02)">
+                <div style="font-weight:900;color:var(--primary);margin-bottom:6px">2) Konfirmasi</div>
+                <div style="color:var(--text-secondary);font-size:.92rem">Klik tombol Konfirmasi agar admin menerima informasi transaksi.</div>
+              </div>
+              <div class="glass-card" style="padding:16px;background:rgba(255,255,255,.02)">
+                <div style="font-weight:900;color:var(--primary);margin-bottom:6px">3) Cek Status</div>
+                <div style="color:var(--text-secondary);font-size:.92rem">Gunakan halaman Cek Pesanan untuk melihat status terbaru.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">
+              <a class="btn btn-secondary" href="cek-pesanan.html">Cek Pesanan</a>
+              <a class="btn btn-accent" href="kontak.html">Hubungi Admin</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KRIS FOLLOWERS SOSMED</h3>
+          <p>Premium services untuk Instagram & TikTok.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Menu</h4>
+          <a href="beranda.html">Beranda</a>
+          <a href="produk.html">Produk</a>
+          <a href="cara-kerja.html">Cara Kerja</a>
+          <a href="pembayaran.html">Pembayaran</a>
+        </div>
+        <div class="footer-col">
+          <h4>Transaksi</h4>
+          <a href="cek-pesanan.html">Cek Pesanan</a>
+          <a href="kontak.html">Kontak</a>
+          <a href="tentang.html">Tentang</a>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <a href="admin-login.html">Login Admin</a>
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year"></span> KRIS FOLLOWERS SOSMED. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script defer src="assets/js/main.js"></script>
+
+
+  <script>
+    (function () {
+      var btns = document.querySelectorAll('[data-method]');
+      var qrisContainer = document.getElementById('qris-container');
+      var numberContainer = document.getElementById('number-container');
+      var copyBtn = document.getElementById('copy-number-btn');
+      var paymentNumberEl = document.getElementById('payment-number');
+
+      var selectedMethod = 'qris';
+      var checkboxEl = document.getElementById('pay-confirmed-checkbox');
+      var confirmBtn = document.getElementById('confirm-payment-btn');
+      var payLoadingEl = document.getElementById('pay-loading');
+
+      function updateConfirmButtonState() {
+        if (!confirmBtn || !checkboxEl) return;
+
+        var hasChecked = !!checkboxEl.checked;
+        var methodOk = !!selectedMethod && (selectedMethod === 'qris' || selectedMethod === 'dana' || selectedMethod === 'gopay');
+        var enabled = hasChecked && methodOk;
+
+        confirmBtn.disabled = !enabled;
+        confirmBtn.classList.toggle('is-enabled', enabled);
+        confirmBtn.setAttribute('aria-disabled', enabled ? 'false' : 'true');
+
+        if (payLoadingEl) {
+          if (!enabled) {
+            payLoadingEl.style.display = 'none';
+          }
+        }
+      }
+
+      function setActiveMethod(method) {
+        selectedMethod = method;
+        // active state on buttons
+        btns.forEach(function (b) {
+          b.classList.toggle('active', b.dataset.method === method);
+          b.setAttribute('aria-selected', b.dataset.method === method ? 'true' : 'false');
+        });
+
+        // content visibility with fade
+        if (method === 'qris') {
+          if (qrisContainer) {
+            qrisContainer.classList.remove('is-hidden');
+            qrisContainer.classList.add('is-shown');
+            qrisContainer.setAttribute('aria-hidden', 'false');
+          }
+          if (numberContainer) {
+            numberContainer.classList.remove('is-shown');
+            numberContainer.classList.add('is-hidden');
+            numberContainer.setAttribute('aria-hidden', 'true');
+          }
+        } else {
+          if (qrisContainer) {
+            qrisContainer.classList.remove('is-shown');
+            qrisContainer.classList.add('is-hidden');
+            qrisContainer.setAttribute('aria-hidden', 'true');
+          }
+          if (numberContainer) {
+            numberContainer.classList.remove('is-hidden');
+            numberContainer.classList.add('is-shown');
+            numberContainer.setAttribute('aria-hidden', 'false');
+          }
+        }
+
+        // Update number + copy behavior for selected method
+        var numbersByMethod = {
+          dana: '0857-8255-4720',
+          gopay: '0857-8255-4720'
+        };
+        if (method === 'dana' || method === 'gopay') {
+          if (paymentNumberEl) paymentNumberEl.textContent = numbersByMethod[method];
+          if (copyBtn) {
+            copyBtn.onclick = function () {
+              var txt = paymentNumberEl ? paymentNumberEl.textContent.trim() : '';
+              if (txt) copyToClipboard(txt);
+            };
+          }
+        } else {
+          // qris default number already shown in markup
+          if (copyBtn) {
+            copyBtn.onclick = null; // QRIS hides number container anyway
+          }
+        }
+      }
+
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var method = btn.dataset.method;
+          setActiveMethod(method);
+        });
+      });
+
+      // Initialize initial state (default active is qris)
+      setActiveMethod('qris');
+    })();
+  </script>
+</body>
+</html>
+
+
